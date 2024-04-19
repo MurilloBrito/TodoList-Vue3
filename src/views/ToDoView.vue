@@ -42,9 +42,6 @@ const store = useStore()
 store.dispatch('getTodos')
   .finally(() => {
     loading.value = false
-    if(store.state.erroMessage != ''){
-      loading.value = true
-    }
   })
 </script>
 
@@ -55,10 +52,11 @@ store.dispatch('getTodos')
   
       <ToDoSpinner v-if="loading" />
   
-      <ToDoErrorNetwork v-if="$store.state.erroMessage.length ">
+      <ToDoErrorNetwork v-else-if="$store.state.erroMessage.length ">
         {{$store.state.erroMessage}}
       </ToDoErrorNetwork>
-      <template>
+      
+      <template v-else>
         <ToDoFormAdd />
   
         <ToDoItems v-if="$store.state.todos.length" />
