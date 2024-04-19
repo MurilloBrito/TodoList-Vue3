@@ -51,7 +51,7 @@ export default createStore({
             })
             .catch((e) => {
               commit('storeTodos', [])
-              commit('storeError', e.message)
+              commit('storeError', 'Codigo: ' + e.code + '' + '' +' Erro: '+e.message)
               resolve()
             })
         }, 1000)
